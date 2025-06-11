@@ -4,8 +4,8 @@
 ## 📁 프로젝트 구조
 ```
 Django_OfficialDocumentTutorial/  
-├── mysite/ # Django 프로젝트 디렉토리  
-├── polls/ # 튜토리얼에서 생성한 앱  
+├── config/ # Django 프로젝트 디렉토리  
+├── todo/ # 튜토리얼에서 생성한 앱  
 ├── venv/ # (가상환경 - .gitignore에 의해 제외됨)  
 ├── db.sqlite3 # SQLite DB 파일  
 └── .gitignore
@@ -62,4 +62,17 @@ git commit -m "style: 코드 들여쓰기 수정"
 git commit -m "refactor: DB 모델 구조 개선"
 git commit -m "test: 유저 모델 테스트 추가"
 git commit -m "chore: 패키지 의존성 업데이트"
+```
 
+
+
+### DB 마이그레이션
+
+##### 1. 모델 변경 사항 탐지 (마이그레이션 파일 생성)
+python manage.py makemigrations
+
+##### 2. 실제 DB에 테이블 생성
+python manage.py migrate
+
+##### 3. 확인: 모델이 정상적으로 DB에 반영되었는지
+python manage.py showmigrations

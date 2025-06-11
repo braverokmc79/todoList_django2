@@ -3,13 +3,13 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 
 class Todo(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-    complete = models.BooleanField(default=False)
-    exp = models.PositiveIntegerField(default=0)
-    completed_at = models.DateTimeField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    name = models.CharField("이름", max_length=100)
+    description = models.TextField("설명",blank=True)
+    complete = models.BooleanField("완료 여부", default=False)
+    exp = models.PositiveIntegerField("경험치",default=0)
+    completed_at = models.DateTimeField("완료 시각", null=True, blank=True)
+    created_at = models.DateTimeField("생성 시각", auto_now_add=True)
+    updated_at = models.DateTimeField("수정 시각", auto_now=True)
 
     def clean(self):
         """
@@ -33,5 +33,11 @@ class Todo(models.Model):
             self.completed_at = None
         super().save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = "할 일"
+        verbose_name_plural = "할 일 목록"
+        
     def __str__(self):
-        return self.name
+        return f"이름: {self.name}, 설명: {self.description}, 완료: {self.complete}, 경험치: {self.exp}, 완료시각: {self.completed_at}"
+
+ 

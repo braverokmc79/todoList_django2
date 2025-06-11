@@ -1,22 +1,22 @@
-"""
-URL configuration for config project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.shortcuts import redirect, render
+from django.urls import path, include
+from django.http import HttpResponseRedirect
+
+
+def root_redirect(request):
+    return HttpResponseRedirect('/todo/')
+
+
+# 루트(/)에서 index.html 렌더링
+def root_index_view(request):
+    return render(request, 'index.html')  # templates/index.html
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),    
+    path("todo/", include("todo.urls")),
+    
+    #path("", root_redirect),  # 루트 URL을 todo 앱의 index로 리다이렉트    
+    path("", root_index_view),  # 루트에서 index.html 렌더링
 ]
