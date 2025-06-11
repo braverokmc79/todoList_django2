@@ -6,8 +6,25 @@
     <title>Document</title>
 </head>
 <body>
+<!-- 
+        name = models.CharField("이름", max_length=100)
+    description = models.TextField("설명",blank=True)
+    complete = models.BooleanField("완료 여부", default=False)
+    exp = models.PositiveIntegerField("경험치",default=0)
+    completed_at = models.DateTimeField("완료 시각", null=True, blank=True)
+    created_at = models.DateTimeField("생성 시각", auto_now_add=True)
+    updated_at = models.DateTimeField("수정 시각", auto_now=True) -->
 
-    목록
+{%  for todo in todos %}
+
+    이름 :{{ todo.name }}<br>
+    설명 :{{ todo.description }}<br>
+    완료 여부 :{{ todo.complete }}<br>
+    경험치 :{{ todo.exp }}<br>
+    완료 시각 :{{ todo.completed_at }}<br>
+    생성 시각 :{{ todo.created_at }}<br>
+    수정 시각 :{{ todo.updated_at }}<br>
+{% endfor %}
     
     
 </body>

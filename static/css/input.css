@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100..900&family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100..900&family=Rye&display=swap');
+@import "tailwindcss";
+@font-face {
+  font-family: 'nosan';
+  src: url('/static/fonts/nosan.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+ --font-display: "Nanum Gothic", sans-serif;
+}
+
+
+body {
+  font-family: 'nosan', 'Nanum Gothic', sans-serif;
+}

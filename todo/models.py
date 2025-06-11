@@ -19,8 +19,9 @@ class Todo(models.Model):
         """
         if self.complete and self.completed_at is None:
             raise ValidationError("완료된 항목은 completed_at 날짜가 필요합니다.")
-        if not self.complete and self.completed_at is not None:
-            raise ValidationError("완료되지 않은 항목은 completed_at 날짜를 가질 수 없습니다.")
+       # if not self.complete and self.completed_at is not None:
+       #     raise ValidationError("완료되지 않은 항목은 completed_at 날짜를 가질 수 없습니다.")
+
 
     def save(self, *args, **kwargs):
         # 상태 변화에 따라 completed_at 자동 설정
