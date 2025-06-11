@@ -1,0 +1,63 @@
+{% extends "todo/include/base.html" %}
+
+{% block title %}<title>할일 수정</title>{% endblock %}
+
+{% block content %}
+<form method="post" class="bg-white p-6 rounded-2xl shadow w-full max-w-lg space-y-4 border border-gray-200">
+  {% csrf_token %}
+
+  <!-- 이름 -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">이름</label>
+    <input type="text" name="name" value="{{ form.name.value }}" 
+           class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+    {% if form.name.errors %}
+      <p class="text-sm text-red-600 mt-1">{{ form.name.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- 설명 -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">설명</label>
+    <textarea name="description" rows="4" 
+              class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">{{ form.description.value }}</textarea>
+    {% if form.description.errors %}
+      <p class="text-sm text-red-600 mt-1">{{ form.description.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- 완료 여부 -->
+  <div>
+    <div class="flex items-center space-x-2">
+      <input type="checkbox" name="complete" {% if form.complete.value %}checked{% endif %}
+             class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+      <label class="text-sm text-gray-700">완료 여부</label>
+    </div>
+    {% if form.complete.errors %}
+      <p class="text-sm text-red-600 mt-1">{{ form.complete.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- 경험치 -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">경험치 (EXP)</label>
+    <input type="number" name="exp" value="{{ form.exp.value|default:0 }}"
+           class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200">
+    {% if form.exp.errors %}
+      <p class="text-sm text-red-600 mt-1">{{ form.exp.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- 버튼 -->
+  <div class="pt-4 flex justify-between">
+    <button type="submit" 
+            class="px-6 py-2 rounded-full bg-green-600 text-white hover:bg-green-700 transition">
+      수정
+    </button>
+    <a href="{% url 'todo:todo_list' %}" 
+       class="px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition">
+      취소
+    </a>
+  </div>
+</form>
+{% endblock %}

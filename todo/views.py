@@ -1,6 +1,8 @@
 from django.shortcuts import render , get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Todo
+from django.urls import reverse ,reverse_lazy
+
 
 
 
@@ -14,25 +16,28 @@ class TodoListView(ListView):
 class TodoCreateView(CreateView):
      model = Todo
      fields = ['name', 'description', 'complete', 'exp']  # 사용할 필드
-     template_name = "todo/todo_form.html"  # 사용할 템플릿 경로
-     success_url = "/todo/"  # 성공 후 리다이렉트할 URL
+     template_name = "todo/todo_create.html"  # 사용할 템플릿 경로
+     success_url = reverse_lazy("todo:todo_list")  # 성공 후 리다이렉트할 URL
     
     
 class TodoDetailView(DetailView):
      model = Todo
      template_name = "todo/todo_detail.html"
+     context_object_name = "todo" # 템플릿에서 사용할 변수명
+     
     
     
 class TodoUpdateView(UpdateView):
      model = Todo
      fields = ['name', 'description', 'complete', 'exp']  # 사용할 필드
-     template_name = "todo/todo_form.html"  # 사용할 템플릿 경로
-     success_url = "/todo/"  # 성공 후 리다이렉트할 URL     
+     template_name = "todo/todo_update.html"  # 사용할 템플릿 경로
+     success_url= reverse_lazy("todo:todo_list") # 성공 후 리다이렉트할 URL     
     
     
     
 class TodoDeleteView(DeleteView):
     model = Todo
-    template_name = "todo/todo_confirm_delete.html"
-    success_url = "/todo/"
+    success_url = reverse_lazy("todo:todo_list")   # 삭제 후 리다이렉트할 URL     
+                
+                
                 

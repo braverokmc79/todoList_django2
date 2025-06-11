@@ -1,0 +1,36 @@
+{% extends "todo/include/base.html" %}
+
+
+{% block title %}</title>할일 상세 보기</title>{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-xl mx-auto bg-white rounded-2xl shadow p-8 border border-gray-200">
+  <h2 class="text-2xl font-bold text-gray-800 mb-2">
+    {{ todo.name }}
+  </h2>
+  
+  {% if todo.complete %}
+    <span class="inline-block mb-4 px-3 py-1 text-sm bg-green-100 text-green-700 rounded-full">완료됨 ✅</span>
+  {% else %}
+    <span class="inline-block mb-4 px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded-full">진행 중 ⏳</span>
+  {% endif %}
+
+  <div class="text-gray-600 leading-relaxed whitespace-pre-wrap mb-6">
+    {{ todo.description|linebreaksbr }}
+  </div>
+
+  <div class="text-sm text-gray-400 mb-2">
+    생성일: {{ todo.created_at|date:"Y년 n월 j일 H:i" }}
+  </div>
+  {% if todo.completed_at %}
+    <div class="text-sm text-gray-400 mb-6">
+      완료일: {{ todo.completed_at|date:"Y년 n월 j일 H:i" }}
+    </div>
+  {% endif %}
+
+  <div class="flex justify-between pt-4 border-t">
+    <a href="{% url 'todo:todo_update' todo.id %}" class="px-5 py-2 rounded-full bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition">수정</a>
+    <a href="{% url 'todo:todo_list' %}" class="px-5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">목록으로</a>
+  </div>
+</div>
+{% endblock %}
