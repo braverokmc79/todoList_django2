@@ -1,5 +1,28 @@
 # Django Todo 시스템
 
+## 화면 구성
+
+##### 1.메인화면
+<img src="https://blogger.googleusercontent.com/img/a/AVvXsEg-2QR0MM2r9tHzCWkieOwgGIhP3vOJihO3bCIlXN6YNSbF1n1iMuoQ8sQnt4_VvxQ8TNQOm5lSIdg9RUkS3XfN88CCd6gbOu5ruKosftWo0crtbLwMoIO83tcLvgW9-tBxK6gGcXNkbttZpndvhj6aogsPPWIHQAW0Pf_DTMc7-NQf2lPjpvLi5zYIR6BO=w640-h364" >
+
+##### 2.회원가입
+<img src="https://blogger.googleusercontent.com/img/a/AVvXsEgPBcBn2OFh3ErQrx_MBzkRQcrzH5VMya7xwWujCFsSRnGYseGiA_CkBGU12XcWW4E5RSJBRWGcGL4yDsuP3Fr5vprdFyxspvwo7XG-A_GCgD2gYD6H3Bb6kxd-VzBz-500-IeMdQpDAAbgRLeim_HzbXmS4NqPdLgmxzuNVMWNYVpWaZtegiX8MdJ5AQLZ=w640-h514" >
+
+
+
+##### 3.Todo 목록
+<img src="https://blogger.googleusercontent.com/img/a/AVvXsEi_n2DUxEBj2EECanJBVPS0JsV6-_TNXdwMXouG57pZZEpTRrlgL0i79Ch587CqaKvnRhIFG5df1vilTc0LkYc2xU5cEqDOOsVoYI_hFJuhoEl1B-U7-HvfFL98sqat-rzqocl0Q3zvvQJ_HSGTVWdT2vsLvXrLbcTW8RArkcYVv3xeMvGZ-vvhRJj53bW_=w528-h640" >
+
+
+##### 4.Todo 등록
+<img src="https://blogger.googleusercontent.com/img/a/AVvXsEg3xuH3QGebLBkMs7Ov3A7QDFOA-3xr_pX0H7jyG_sbIAK9u8NIxEMHANMM_fiOIDtY6iA9pYbt7LNkOYQSGcmh085luMPZSIoglILDXd2EntalHbSLPv9vs5HHNGyyOvwLGjoCU91E5POzcQRz_-1oNX31UbZexmXuhG7Sw92QJ61hQ1HDyR16oD_l0DRt=w525-h640" >
+
+
+##### 5.Todo 수정
+<img src="https://blogger.googleusercontent.com/img/a/AVvXsEhWAaAPHFxwJnuK90jyO7RwNw_Z0n_gHZHmPOCyHY9ivBK-PcXw7fHJ_fBjYcjsylolVfjcB2lMmnE-uy9mrnWiRgWZq7FB7awC9Ws9wumH4lVWZbBTRxP5C9EYHUuwAU7dK8uYcbja50pGccVz2sj4r4UQ3qAQL7T32FoiFC98ZwhiO-RruADhwH7Dq4lU=w536-h640" >
+
+
+
 
 ## 📁 프로젝트 구조
 ```
@@ -64,6 +87,9 @@ git commit -m "refactor: DB 모델 구조 개선"
 git commit -m "test: 유저 모델 테스트 추가"
 git commit -m "chore: 패키지 의존성 업데이트"
 ```
+
+
+
 
 
 
