@@ -1,0 +1,27 @@
+
+<header class="bg-white shadow-md">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-neutral-800">Django Todo App</a>    
+        <nav class="space-x-6">
+         <div class="absolute top-4 right-6 flex space-x-3">
+        <a href="https://codam.kr" 
+            class="text-sm text-neutral-500 font-bold hover:text-neutral-800 transition-colors flex flex-row items-center 
+            space-x-2  "
+            target="_blank" rel="noopener noreferrer">
+            <svg class="w-5 h-5 md:w-5 md:h-5" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="none"></rect>
+                <path d="M 50 100 A 50 50 0 0 0 150 100" fill="#ED1B25"></path>
+                <text x="100" y="85" font-family="Arial Black, Arial, sans-serif" 
+                font-size="90" font-weight="bold" text-anchor="middle" fill="#ED1B25" dominant-baseline="middle"> C </text>
+            </svg>
+            코담
+        </a>
+        <!-- rel="noopener noreferrer" → 보안상 권장되는 속성 (탭 간 간섭 방지) -->
+
+         <!-- 회원가입 / 로그인 영역 include -->
+        {% include "todo/include/header-account.html"  %}
+          </div>
+    </nav>
+</div>
+</header>
+

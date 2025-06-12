@@ -2,21 +2,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
-    <title>{% block title %}Todo App{% endblock %}</title>
+    <title>{% block title %}Django Todo App{% endblock %}</title>
     {% include "todo/include/head.html" %}
     {% block css %}{% endblock %}
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
     {% include "todo/include/header.html" %}
 
- <div class="min-h-screen flex flex-col items-center justify-start px-4 py-6">
-    <h1 class="text-4xl font-bold mb-8 text-center text-gray-600">✨ 나의 할일 </h1>
+    
+ <div class="min-h-screen flex flex-col items-center justify-start px-4 py-6">   
     {% block content %}{% endblock %}
  </div>
 
-  
     {% include "todo/include/footer.html" %}  
-
-    {% block extra_js %}{% endblock %}
 </body>
 </html>

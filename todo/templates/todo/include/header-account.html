@@ -1,0 +1,22 @@
+        <!-- 상단 회원가입/로그인 -->
+     
+            {% if  user.is_authenticated %}
+            <a href="#" class="px-4 py-2  text-sm font-medium text-neutral-800  ">
+                {{ user.username }}님
+            </a>
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="px-4 py-2 bg-neutral-800 text-sm font-medium text-white rounded-full shadow hover:bg-neutral-900 transition-all">
+                        로그아웃
+                    </button>
+            </form>
+     
+            {% else %}
+             <a href="/signup" class="px-4 py-2 bg-white text-sm font-medium text-neutral-800 border border-neutral-300 rounded-full shadow hover:bg-neutral-100 transition-all">
+                회원가입
+                </a>
+             <a href="/login" class="px-4 py-2 bg-neutral-800 text-sm font-medium text-white rounded-full shadow hover:bg-neutral-900 transition-all">
+                로그인
+             </a>           
+            {% endif %}
+      

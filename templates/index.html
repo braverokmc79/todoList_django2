@@ -3,32 +3,29 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Django Todo Project</title>
-    <link rel="stylesheet" href="{% static 'css/output.css' %}" /> 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>      
+    <title>Django Todo App</title>  
+     {% include "todo/include/head.html" %}
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-zinc-50 to-stone-100 flex items-center justify-center text-zinc-800">
+  <body class="min-h-screen bg-gradient-to-br from-zinc-50 to-stone-100 text-zinc-800 relative">
 
-    <div class="text-center space-y-6 px-6">
+    <!-- 상단 회원가입/로그인 -->
+    {% include "todo/include/header-account.html"  %}
+
+    <!-- 본문 -->
+    <div class="flex flex-col items-center justify-center min-h-screen text-center px-6">
       <h1 class="text-5xl font-extrabold tracking-tight drop-shadow-sm transition-all duration-300 hover:scale-105">
-        Django Todo Project
+        Django Todo App
       </h1>
 
-      <p class="text-lg text-zinc-500">당신의 하루를 더 명확하게</p>
+      <p class="text-lg text-zinc-500 mt-4">당신의 하루를 더 명확하게</p>
 
-      <a href="/todo" class="inline-block mt-4 px-6 py-3
-      
-      bg-neutral-800 text-white 
-      font-bold rounded-full shadow-md hover:bg-neutral-900 active:scale-95 transition-all duration-200">
+      <a href="/todo" class="mt-6 px-6 py-3 bg-neutral-800 text-white font-bold rounded-full shadow-md hover:bg-neutral-900 active:scale-95 transition-all duration-200">
         Todo 시작하기 →
       </a>
-
-      <div class="mt-10 text-xs text-zinc-400">
-        © 2025 Django Todo. All rights reserved.
-      </div>
     </div>
+
+
+     {% include "todo/include/footer.html"  %}
 
   </body>
 </html>

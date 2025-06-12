@@ -1,11 +1,30 @@
 {% extends "todo/include/base.html" %}
 
-{% block title %}<title>할일 목록</title>{% endblock %}
+{% block title %}할일 목록{% endblock %}
 
 {% block content %}
-<div class="w-full max-w-2xl space-y-6">
+<div class="w-full max-w-3xl space-y-6">
 
-  <!-- 새 할 일 버튼 (상단) -->
+  <!-- 검색/필터 폼 -->
+  <form method="get" class="flex flex-col sm:flex-row items-center gap-2 mb-4">
+    <input type="search" name="q" placeholder="검색어 입력" value="{{ query }}" class="flex-1 border px-4 py-2 rounded-lg">
+
+    <select name="complete" class="border px-3 py-2 rounded-lg">
+      <option value="" {% if complete_filter == "" %}selected{% endif %}>전체</option>
+      <option value="complete" {% if complete_filter == "complete" %}selected{% endif %}>완료</option>
+      <option value="incomplete" {% if complete_filter == "incomplete" %}selected{% endif %}>미완료</option>
+    </select>
+
+    <select name="sort" class="border px-3 py-2 rounded-lg">
+      <option value="" {% if sort == "" %}selected{% endif %}>최신순</option>
+      <option value="exp" {% if sort == "exp" %}selected{% endif %}>경험치순</option>
+      <option value="complete_date" {% if sort == "complete_date" %}selected{% endif %}>완료일순</option>
+    </select>
+
+    <button type="submit" class="bg-gray-600 text-white px-4 py-2 rounded-lg">검색</button>
+  </form>
+
+  <!-- 새 할 일 버튼 -->
   <div class="flex justify-end">
     <a href="{% url 'todo:todo_create' %}" class="inline-flex items-center gap-2 px-5 py-2 bg-gray-600 text-white text-sm font-medium rounded-full shadow hover:bg-gray-700 transition">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,31 +39,32 @@
     <div class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition-all border border-gray-200">
       <div class="flex items-center justify-between">
         <div>
-          
-          
-         <!-- 목록 템플릿의 제목 부분에 링크 걸기 -->
-        {% if todo.complete %}
-          <h2 class="text-lg font-semibold line-through text-gray-400">
-            <a href="{% url 'todo:todo_detail' todo.id %}" class="hover:underline">{{ todo.name }}</a>
-          </h2>
-        {% else %}
-          <h2 class="text-lg font-semibold text-gray-800">
-            <a href="{% url 'todo:todo_detail' todo.id %}" class="hover:underline">{{ todo.name }}</a>
-          </h2>
-        {% endif %}
-
-
-
-
+          {% if todo.complete %}
+            <h2 class="text-lg font-semibold text-gray-400">
+              <a href="{% url 'todo:todo_detail' todo.id %}" class="hover:underline line-through">{{ todo.name }}</a>  
+              <small class="text-gray-500"> (완료)</small>
+            </h2>
+          {% else %}
+            <h2 class="text-lg font-semibold text-gray-800">
+              <a href="{% url 'todo:todo_detail' todo.id %}" class="hover:underline">{{ todo.name }}</a>
+            </h2>
+          {% endif %}
           <p class="text-sm text-gray-500 mt-1">{{ todo.description }}</p>
         </div>
         <div class="flex space-x-2">
-          <a href="{% url 'todo:todo_update' todo.id %}" class="text-sm px-3 py-1 rounded-xl
-           bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition">수정</a>
+          <a href="{% url 'todo:todo_update' todo.id %}" class="text-sm px-3 py-1 rounded-xl bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition">수정</a>
           
-           <form method="post" action="{% url 'todo:todo_delete' todo.id %}">
+          <!-- 삭제 버튼: 모달 트리거 -->
+          <button 
+              type="button" 
+              class="text-sm px-3 py-1 rounded-xl bg-red-100 text-red-800 hover:bg-red-200 transition"
+              onclick="openDeleteModal({{ todo.id }})">
+              삭제
+          </button>
+
+          <!-- 삭제 폼 (숨김) -->
+          <form id="delete-form-{{ todo.id }}" method="post" action="{% url 'todo:todo_delete' todo.id %}">
             {% csrf_token %}
-            <button type="submit" class="text-sm px-3 py-1 rounded-xl bg-red-100 text-red-800 hover:bg-red-200 transition">삭제</button>
           </form>
         </div>
       </div>
@@ -52,5 +72,59 @@
   {% empty %}
     <p class="text-center text-gray-400">할 일이 없습니다.</p>
   {% endfor %}
+
+  <!-- 페이징 -->
+  <div class="flex justify-center mt-6">
+    <div class="inline-flex items-center space-x-2">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">이전</a>
+      {% endif %}
+      <span class="px-3 py-1 bg-gray-100 rounded text-gray-700">
+        페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+      </span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">다음</a>
+      {% endif %}
+    </div>
+  </div>
 </div>
+
+
+
+<!-- ✅ Tailwind 삭제 모달 -->
+<!-- ✅ Tailwind 부드러운 반투명 모달 -->
+<div id="delete-modal" class="hidden fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+    <h2 class="text-lg font-bold mb-4 text-center">정말 삭제하시겠습니까?</h2>
+    <div class="flex justify-center space-x-4">
+      <button onclick="confirmDelete()" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-rose-600 cursor-pointer">삭제</button>
+      <button onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400  cursor-pointer">취소</button>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  let currentDeleteId = null;
+
+  function openDeleteModal(id) {
+    currentDeleteId = id;
+    document.getElementById("delete-modal").classList.remove("hidden");
+  }
+
+  function closeDeleteModal() {
+    currentDeleteId = null;
+    document.getElementById("delete-modal").classList.add("hidden");
+  }
+
+  function confirmDelete() {
+    if (currentDeleteId) {
+      document.getElementById(`delete-form-${currentDeleteId}`).submit();
+    }
+  }
+</script>
 {% endblock %}
