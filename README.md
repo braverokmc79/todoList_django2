@@ -1,5 +1,13 @@
 # Django Todo 시스템
 
+
+## 학습 추천 :
+<a href="https://codam.kr/" target="_blank">코담</a>
+파이썬·장고 웹개발 | 코담 - 코드에 세상을 담다
+<img src="https://codam.kr/assets/images/og-image.jpg">
+
+
+
 ## 화면 구성
 
 ##### 1.메인화면
