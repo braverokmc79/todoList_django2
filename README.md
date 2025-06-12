@@ -2,8 +2,10 @@
 
 
 ## 학습 추천 :
-<a href="https://codam.kr/" target="_blank">코담
+### <a href="https://codam.kr/" target="_blank">코담</a>
+<br>
 파이썬·장고 웹개발 | 코담 - 코드에 세상을 담다
+
 <a href="https://codam.kr/" target="_blank">
 <img src="https://codam.kr/assets/images/og-image.jpg">
 </a>
