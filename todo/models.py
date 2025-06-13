@@ -39,11 +39,11 @@ class Todo(models.Model):
             self.completed_at = None
         super().save(*args, **kwargs)
 
-    class Meta:
-        verbose_name = "할 일"
-        verbose_name_plural = "할 일 목록"
+    # class Meta:
+    #     verbose_name = "할 일"
+    #     verbose_name_plural = "할 일 목록"
         
     def __str__(self):
-        return f"이름: {self.name}, 설명: {self.description}, 완료: {self.complete}, 경험치: {self.exp}, 완료시각: {self.completed_at}"
+        return f"Todo: {self.name},  완료: {self.complete},  완료시각: {self.completed_at}"
 
  
